@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="style.css" media="screen and (min-width: 320px)" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+  </head>
+  <body>
+        <nav class="navbar navbar-light bg-light container-navbar">
+            <div class="logo-container">
+                <a class="navbar-brand" href="index.html">iBooks!</a>
+            </div>
+            <div class="search-container">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>                        
+            </div>
+            <div class="menu-container" id="exCollapsingNavbar"> 
+                <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                    <li class="dropdown order-1">
+                        <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-success dropdown-toggle"><span class="fa fa-user"></span></button>
+                        <div class="dropdown-menu">
+                            <form class="px-4 py-3">
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                    <label class="form-check-label" for="dropdownCheck">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Sign in</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">New around here? Sign up</a>
+                            <a class="dropdown-item" href="#">Forgot password?</a>
+                        </div>
+                        <div class="btn-group">
+                                <button class="btn btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="fa fa-gear" aria-hidden="true">
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Profle</a>
+                                    <a class="dropdown-item" href="#">About Us</a>
+                                    <a class="dropdown-item" href="#">Help</a>
+                                </div>
+                        </div>
+                        <button class="btn btn-outline-success" id="dropdownMenu1" data-toggle="modal" data-target="#exampleModal"><span class="fa fa-shopping-cart" aria-hidden="true"></span></button>
+                    </li>
+                </ul>
+            </div>   
+         </nav>
+         <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Promo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">FAQ</a>
+            </li>
+        </ul>
+         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="https://i.pinimg.com/originals/a1/4b/37/a14b37c0b1cc54a66773d7d1be1f5d61.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="https://www.baystateparent.com/wp-content/uploads/2018/03/STU7BUE.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="http://www.balloonsandchapters.com/img/top/promo/35a994f36c132888612c951bf4427477.jpg" alt="Third slide">
+                </div>
+            </div>
+        </div>
+        <div id="app">
+            <div class="container-writer">
+                <div class="review-books">
+                    <img class="d-block w-100" src="https://vik231229m1gjzr5eqnxbznd-wpengine.netdna-ssl.com/wp-content/uploads/sites/9/2015/09/featured-image-1.jpg">
+                </div>
+                <div class="card review-reader">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Review Books</h5>
+                        <small>by: Muhammad Ramadiansyah</small>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+                        
+            <div class="container-top-products">
+                <div class="card text-center wobble" v-for="book in books">
+                    <div class="card-header">
+                        {{book.title}}
+                    </div>
+                    <div class="card-body">
+                        <img class="card-img-top" style="margin-bottom:10px;" src="http://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781501173219/all-the-light-we-cannot-see-9781501173219.jpg" alt="Card image cap">
+                        <p class="card-text">{{ `Rp ${book.price.toLocaleString()}`}}</p>
+                        <div v-if="itemAdd">
+                            <button class="btn btn-outline-success" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">Add to Cart</button>
+                        </div>
+                        <div v-else="">
+                            <button class="btn btn-outline-danger" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">-</button>
+                            <button class="btn btn-outline-secondary disabled" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">{{bookQty}}</button>
+                            <button class="btn btn-outline-success" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">+</button>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <span v-for="rating in book.rating" class="fa fa-star checked"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content modal-cart">
+                        <div class="modal-header title-cart-table">
+                            <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Icon</th>
+                                        <th>Items</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in cartLists">
+                                        <td><img v-bind:src="item.image" style="height: 40px; width: 40px;"></td>
+                                        <td>{{item.title}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{priceItems(item)}}</td>
+                                    </tr>
+                                    <tr class="total-price-items">
+                                        <td>Total Price: </td>
+                                        <td></td><td></td>
+                                        <td>{{totalPrice}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-success">Buy Item</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        
+            
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="dataBooks.js"></script>
+    <script>
+  
+    new Vue({
+        el: '#app',
+        data: {
+            books: dataBooks,
+            cartLists: [],
+            itemAdd: true,
+            bookQty: 2,
+        },
+        methods: {
+            addToCart: function(book){
+                this.itemAdd = false;
+                let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
+                if(index == -1){
+                    book.quantity = 1
+                    this.cartLists.push(book);
+                }else{
+                    let quantity = this.cartLists[index].quantity
+                    quantity+=1;
+                    this.cartLists[index].quantity = quantity;
+                    let updateListCart = this.cartLists[index];
+                    this.cartLists.splice(index,1,updateListCart)
+                }
+            },
+            priceItems: function(book){
+                let price = book.quantity * book.price
+                return `Rp. ${price.toLocaleString()}`
+            },
+            getQuantityItem: function(book){
+                let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
+                console.log(this.bookQty)
+            }
+        },
+        computed: {
+            totalPrice: function(){
+                let totalPrice = 0
+                for(let i=0; i< this.cartLists.length;i++){
+                    totalPrice += this.cartLists[i].price * this.cartLists[i].quantity
+                }
+                  return `Rp. ${totalPrice.toLocaleString()}`
+            },
+        },
+    })
+
+    </script>
+  </body>
+</html>

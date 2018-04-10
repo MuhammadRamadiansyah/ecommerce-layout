@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="col-1 collapse navbar-collapse">
+                <a class="navbar-brand" href="index.html">iFarming!</a>
+            </div>
+            <div class="col-3 collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                </ul> 
+            </div>
+            <div class="col-3 offset-1 collapse navbar-collapse">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-3 offset-1 collapse navbar-collapse" id="exCollapsingNavbar">
+                <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                    <li class="dropdown order-1">
+                        <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-success dropdown-toggle">Login <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right mt-1 ">
+                            <li class="p-3">
+                                <form class="form" method="POST" action="/login">
+                                    <div class="form-group">
+                                        <input name="username" placeholder="Username" class="form-control form-control-sm" type="text" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="password" placeholder="Password" class="form-control form-control-sm" type="text" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                        <button class="btn btn-outline-success" type="button">Register</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-form-register">
+            <form>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                    <label for="validationServer01">First name</label>
+                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                    <label for="validationServer02">Last name</label>
+                    <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                    <label for="validationServerUsername">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                        </div>
+                        <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+                        <div class="invalid-feedback">
+                        Please choose a username.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                    <label for="validationServer03">City</label>
+                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                    </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                    <label for="validationServer04">State</label>
+                    <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid state.
+                    </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                    <label for="validationServer05">Zip</label>
+                    <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid zip.
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+                    <label class="form-check-label" for="invalidCheck3">
+                        Agree to terms and conditions
+                    </label>
+                    <div class="invalid-feedback">
+                        You must agree before submitting.
+                    </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit form</button>
+            </form>
+        </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+  <footer>
+      
+  </footer>
+</html>

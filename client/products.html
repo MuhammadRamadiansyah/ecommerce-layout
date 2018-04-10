@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="col-1 collapse navbar-collapse">
+                <a class="navbar-brand" href="index.html">iRenewable!</a>
+            </div>
+            <div class="col-3 collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                </ul> 
+            </div>
+            <div class="col-3 offset-1 collapse navbar-collapse">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-3 offset-1 collapse navbar-collapse" id="exCollapsingNavbar">
+                <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                    <li class="dropdown order-1">
+                        <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-success dropdown-toggle">Login <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right mt-1 ">
+                            <li class="p-3">
+                                <form class="form" method="POST" action="/login">
+                                    <div class="form-group">
+                                        <input name="username" placeholder="Username" class="form-control form-control-sm" type="text" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="password" placeholder="Password" class="form-control form-control-sm" type="text" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                        <button class="btn btn-outline-success" type="button">Register</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-products">
+            <div class="row">
+                <div class="col-12 general-categories">
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Wind Energy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Photo Voltaic</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Hydro Energy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Geothermal</a>
+                        </li>
+                     </ul>
+
+                </div>
+                <div class="col-2 categories-filter-products">
+                    <h5 class="card-header">Wind Energy</h5>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Turbine</a>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Generator Low RPM</a>
+                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Generator high RPM</a>
+                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Motor Synchronous</a>
+                    </div>
+                </div>
+
+                <div class="col-10">
+                    <div class="products-list" style="width: 18rem;">
+                        <img class="card-img-top" src="https://ae01.alicdn.com/kf/HTB1X75ZRFXXXXcUXVXXq6xXFXXX3/600W-AC-12V-24V-48V-Wind-Generator-Turbine.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Wind Turbine</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                Buy item
+                                </button>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                View Detail
+                            </button>
+                        </div>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <div class="products-list" style="width: 18rem;">
+                            <img class="card-img-top" src="https://i0.wp.com/www.anliatec.com/wp-content/uploads/2017/01/Micro_Hydro.jpg?fit=1600%2C900" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Micro-hydro</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                    Buy item
+                                    </button>
+                                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                    View Detail
+                                </button>
+                            </div>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                    </div>
+                    <div class="products-list" style="width: 18rem;">
+                            <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm8CX8USCTwS5xV2G_voNGce5WuHdHdXYiTc99ZJrdws6XYzJE" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Photo Voltaic 1000KW</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                    Buy item
+                                    </button>
+                                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                    View Detail
+                                </button>
+                            </div>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                    </div>
+                    <div class="products-list" style="width: 18rem;">
+                            <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Hammond_self_starting_synchronous_motor.jpg/1200px-Hammond_self_starting_synchronous_motor.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Synchronous Motor</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                    Buy item
+                                    </button>
+                                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                    View Detail
+                                </button>
+                            </div>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                    </div>
+                    <div class="products-list" style="width: 18rem;">
+                            <img class="card-img-top" src="https://i.ytimg.com/vi/ny5mNWqu3mY/maxresdefault.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Low RPM Generator</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                    Buy item
+                                    </button>
+                                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                    View Detail
+                                </button>
+                            </div>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star" ></span>
+                    </div>
+                    <div class="products-list" style="width: 18rem;">
+                            <img class="card-img-top" src="http://www.thinkgeoenergy.com/wp-content/uploads/2011/11/Siemens_SST-400_turbine.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Geothermal Turbine</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                    Buy item
+                                    </button>
+                                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                    View Detail
+                                </button>
+                            </div>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                    </div>
+                </div>
+            </div>
+            <nav class ="list-product-paggination"aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+              
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Item Name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to add to your cart?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success">Buy Item</button>
+            </div>
+            </div>
+        </div>
+    </div>
+       
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+  <footer>
+      
+  </footer>
+</html>
