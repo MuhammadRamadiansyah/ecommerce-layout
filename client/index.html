@@ -117,11 +117,11 @@
                         <div v-if="itemAdd">
                             <button class="btn btn-outline-success" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">Add to Cart</button>
                         </div>
-                        <div v-else="">
+                        <!-- <div v-else="">
                             <button class="btn btn-outline-danger" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">-</button>
-                            <button class="btn btn-outline-secondary disabled" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">{{bookQty}}</button>
+                            <button class="btn btn-outline-secondary" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">{{bookQty}}</button>
                             <button class="btn btn-outline-success" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">+</button>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card-footer text-muted">
                         <span v-for="rating in book.rating" class="fa fa-star checked"></span>
@@ -187,7 +187,6 @@
         },
         methods: {
             addToCart: function(book){
-                this.itemAdd = false;
                 let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
                 if(index == -1){
                     book.quantity = 1
