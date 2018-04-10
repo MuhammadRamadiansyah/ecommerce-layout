@@ -114,7 +114,7 @@
                     <div class="card-body">
                         <img class="card-img-top" style="margin-bottom:10px;" src="http://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781501173219/all-the-light-we-cannot-see-9781501173219.jpg" alt="Card image cap">
                         <p class="card-text">{{ `Rp ${book.price.toLocaleString()}`}}</p>
-                        <div v-if="itemAddToCart">
+                        <div v-if="checkItemInCart(book)">
                             <button class="btn btn-outline-success" type="button" aria-haspopup="true" aria-expanded="false" v-on:click="addToCart(book)">Add to Cart</button>
                         </div>
                         <div v-else="">
@@ -186,23 +186,14 @@
         data: {
             books: dataBooks,
             cartLists: [],
-            itemAddToCart: true,
             bookQty: 2,
         },
         methods: {
             addToCart: function(book){
-                let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
-                if(index == -1){
-                    book.quantity = 1
-                    this.cartLists.push(book);
-                    this.itemAddToCart = false;
-                }else{
-                    let quantity = this.cartLists[index].quantity
-                    quantity+=1;
-                    this.cartLists[index].quantity = quantity;
-                    let updateListCart = this.cartLists[index];
-                    this.cartLists.splice(index,1,updateListCart)
-                }
+                let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);    
+                book.quantity = 1
+                this.cartLists.push(book);
+                
             },
             priceItems: function(book){
                 let price = book.quantity * book.price
@@ -231,6 +222,14 @@
                 this.cartLists.splice(index,1,updateListCart)
                 if(this.cartLists[index].quantity<=0){
                     this.cartLists.splice(index,1)
+                }
+            },
+            checkItemInCart: function(book){
+                let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
+                if(index>-1){
+                    return false;
+                }else{
+                    return true;
                 }
             }
         },
