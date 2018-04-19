@@ -1,5 +1,4 @@
 const jtw = require('jsonwebtoken')
-const bcrypt = require('bcript')
 const envKey = process.env.secretKey
 const {isError} = require('../helpers/statusResponse')
 

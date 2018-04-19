@@ -10,6 +10,10 @@ let userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'name cannot be empty']
     },
+    role: {
+        type: String,
+        required: [true, 'name cannot be empty']
+    },
     email: {
         type: String,
         unique: true,
@@ -20,7 +24,7 @@ let userSchema = new mongoose.Schema({
         required: [true, 'password cannot be empty']
     },
     balance: {
-        type: number,
+        type: Number,
         required: [true, 'balanced cannot be empty'] 
     }
 },{
@@ -37,6 +41,6 @@ userSchema.methods.comparePassword = function(plain_password, hash, callback){
     })
 }
 
-let User = mongoose.model('Users', userSchema)
+let User = mongoose.model('users', userSchema)
 
 module.exports = User
