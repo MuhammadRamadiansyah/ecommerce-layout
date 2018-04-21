@@ -26,7 +26,11 @@ let userSchema = new mongoose.Schema({
     balance: {
         type: Number,
         required: [true, 'balanced cannot be empty'] 
-    }
+    },
+    cart:[{
+        type: Schema.Types.ObjectId,
+        ref: "items"
+    }]
 },{
     timestamps: true
 })

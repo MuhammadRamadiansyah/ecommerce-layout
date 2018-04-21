@@ -17,9 +17,22 @@ let itemSchema = new mongoose.Schema({
     image: {
       type: String,
     },
+    category: {
+			type: Schema.Types.ObjectId,
+			ref: "categories"
+    },
 },{
     timestamps: true
 })
+
+itemSchema.pre('save', function(next){	
+	this.model('categories').update(   
+		{_id:  {$in: this.category}}, 
+		{$push: {items: this._id}}, 
+		{multi: true},
+		next,
+	)
+});
 
 let Item = mongoose.model('items', itemSchema)
 

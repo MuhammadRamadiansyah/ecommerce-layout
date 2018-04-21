@@ -68,6 +68,7 @@
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Category</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -78,6 +79,7 @@
             <td>{{item.name}}</td>
             <td>{{ `Rp ` + item.price.toLocaleString()}}</td>
             <td>{{item.quantity}}</td>
+            <td>{{item.category.name}}</td>
             <td><button type="button" class="btn btn-outline-primary">EDIT</button>  <button type="button" class="btn btn-outline-danger">DELETE</button></td>
           </tr>
         </tbody>
@@ -92,7 +94,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add new item</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -101,25 +103,32 @@
                 <form>
                   <div class="form-group">
                     <label for="formGroupExampleInput">Names: </label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" v-model="itemName">
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter item name" v-model="itemName">
                   </div>
                   <div class="form-group">
                     <label for="formGroupExampleInput2">Price: </label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input" v-model="price">
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter price item" v-model="price">
                   </div>
                   <div class="form-group">
                     <label for="formGroupExampleInput">Quantity: </label>
-                    <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Example input" v-model="quantity">
+                    <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Enter quantity item" v-model="quantity">
                   </div>
                   <div class="form-group">
-                      <label for="title">Picture/Poster</label>
-                      <input type="file" class="form-control" name="picture" accept="image/*" @change="handleUploadPicture">
+                      <label for="picture">Picture/Poster</label>
+                      <input type="file" class="form-control" name="picture" accept="image/*" @change="handleUploadPicture" placeholder="Enter image item">
+                  </div>
+                  <label for="category">Category</label>
+                  <div class="input-group mb-3">
+                    <select class="custom-select" id="inputGroupSelect02">
+                        <option class="disabled" aria-placeholder="Select an option" value="null">Select an option</option>
+                      <option name="tag" v-for="(tag, index) in tags" :key="index"  :value="tag.name">{{tag.name}}</option>
+                    </select>
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" @click="upload">Save changes</button>
+                <button type="button" class="btn btn-primary" @click="upload">Submit</button>
               </div>
             </div>
           </div>
@@ -150,7 +159,8 @@
       quantity: '',
       image: '',
       dummy: 'https://storage.googleapis.com/ecommerce.ramadiansyah.gq/1524306332513-Unknown.png',
-      items: [] 
+      items: [],
+      tags: [],
     },
     methods: {
       checkValidation () {
@@ -196,7 +206,8 @@
         formData.append('name', this.itemName)
         formData.append('price', this.price)
         formData.append('quantity', this.quantity)
-
+        let newTag = $('[name="tag"]').val()
+        formData.append('category', newTag)
         axios.post('http://localhost:3000/users/upload', formData, {
               headers: {
                 'Content-type': 'multipart/form-data',
@@ -218,8 +229,16 @@
       getItems () {
         axios.get('http://localhost:3000/users/getItems', {headers: {token: localStorage.getItem('token')}})
              .then((response) => {
-               console.log(response.data.result)
                this.items = response.data.result
+             })
+             .catch((err) => {
+               alert(err.message)
+             })
+      },
+      getCategories () {
+        axios.get('http://localhost:3000/users/categories')
+             .then((response) => {
+               this.tags = response.data.result
              })
              .catch((err) => {
                alert(err.message)
@@ -270,6 +289,7 @@
       if(localStorage.getItem('token')) {
         this.isLogin = true;
         this.getItems()
+        this.getCategories()
       }
     }
   })

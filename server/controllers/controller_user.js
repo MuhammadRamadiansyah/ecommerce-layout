@@ -1,5 +1,6 @@
 const Users = require('../models/users')
 const Items = require('../models/items')
+const Categories = require('../models/categories')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const envKey = process.env.secretKey
@@ -23,9 +24,9 @@ module.exports = {
 					email: req.body.email,
 					password: req.body.password,
 					balance: 50000,
-					role: req.body.role
+					role: req.body.role,
+					cart: []
 			}
-
 			bcrypt.hash(newData.password, 10, (err, hash) => {
 					if(err) isError(res, err, 500);
 					newData.password = hash
@@ -63,31 +64,79 @@ module.exports = {
 				 })
 	},
 	upload: function(req, res) {
-		let newItem = {
-			name: req.body.name,
-			price: parseInt(req.body.price),
-			quantity: parseInt(req.body.quantity),
-			image: req.file.cloudStoragePublicUrl
-		}
-
-		let item = new Items(newItem)
-		item.save()
-				.then((response) => {
-					res.send({
-						status: 200,
-						message: 'Your file is successfully uploaded',
-						link: req.file.cloudStoragePublicUrl
-					})
-				})
-				.catch((err) => {
-					isError(res, err, 500)
-				})
+		Categories.findOne({name: req.body.category})
+							.exec()
+							.then((tag) => {
+								if(tag == null) isError(res, err = {message: 'tag not found'}, 500)
+								let newItem = {
+									name: req.body.name,
+									price: parseInt(req.body.price),
+									quantity: parseInt(req.body.quantity),
+									image: req.file.cloudStoragePublicUrl,
+									category: tag._id
+								}
+								let item = new Items(newItem)
+								item.save()
+										.then((response) => {
+											res.send({
+												status: 200,
+												message: 'Your file is successfully uploaded',
+												link: req.file.cloudStoragePublicUrl
+											})
+										})
+										.catch((err) => {
+											isError(res, err, 500)
+										})
+							})
+							.catch((err) => {
+								isError(res, err, 500)
+							}) 
 	},
 	getItems: function (req, res) {
 		Items.find()
+				 .populate('category')
 				 .exec()
 				 .then((response) => {
 					 isSuccess(res, response, 200, 'success get all items data')
+				 })
+				 .catch((err) => {
+					 isError(res, err, 500)
+				 })
+	},
+	addCategory: function (req, res) {
+		let newCategory = {
+			name: req.body.name,
+			books: []
+		}
+		let category = new Categories(newCategory)
+		category.save()
+						.then((result) => {
+							isSuccess(res, result, 201, 'success add tags')
+						})
+						.catch((err) => {
+							isError(res, err, 500)
+						})
+	},
+	getCategories: function (req, res) {
+		Categories.find()
+							.then((categories) => {
+								isSuccess(res, categories, 200, 'success get all categories')
+							})
+							.catch((err) => {
+								isError(res, err, 500)
+							})
+	},
+	addToCart: function (req, res) {
+
+	},
+	getUserInfo: function (req, res) {
+		Users.findOne({_id: req.decoded.id})
+				 .then((user) => {
+					if(user === null) {
+						isError(res, err = {message: 'user not found'})
+					} else {
+						isSuccess(res, user, 200, 'user found')
+					}
 				 })
 				 .catch((err) => {
 					 isError(res, err, 500)

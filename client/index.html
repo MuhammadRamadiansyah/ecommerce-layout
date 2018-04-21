@@ -12,62 +12,45 @@
 
   </head>
   <body>
-        <div id="app">
-            <navbar-header></navbar-header>
-            <ul class="nav nav-pills nav-fill">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Events</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Promo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">FAQ</a>
-                </li>
-            </ul>
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="https://i.pinimg.com/originals/a1/4b/37/a14b37c0b1cc54a66773d7d1be1f5d61.jpg" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="https://www.baystateparent.com/wp-content/uploads/2018/03/STU7BUE.jpg" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="http://www.balloonsandchapters.com/img/top/promo/35a994f36c132888612c951bf4427477.jpg" alt="Third slide">
-                    </div>
-                </div>
-            </div>
-            <div class="container-writer">
-                <div class="review-books">
-                    <img class="d-block w-100" src="https://vik231229m1gjzr5eqnxbznd-wpengine.netdna-ssl.com/wp-content/uploads/sites/9/2015/09/featured-image-1.jpg">
-                </div>
-                <div class="card review-reader">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Review Books</h5>
-                        <small>by: Muhammad Ramadiansyah</small>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                    </div>
-                </div>
-            </div>
-                        
-            <div class="container-top-products">
-                <list-books v-for="book in books" :cartlists="cartLists" :book="book" @additem="addToCart" @increaseitem="increaseItem" @decreaseItem="decreaseItem"></list-books>
-            </div>
-            <!-- Modal -->
-            <!-- <items-in-cart></items-in-cart> -->
-        </div>
-       
+		<div id="app">
+				<navbar-header :islogin="isLogin" :user="user"></navbar-header>
+				<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner">
+								<div class="carousel-item active">
+										<img class="d-block w-100" src="https://i.pinimg.com/originals/a1/4b/37/a14b37c0b1cc54a66773d7d1be1f5d61.jpg" alt="First slide">
+								</div>
+								<div class="carousel-item">
+										<img class="d-block w-100" src="https://www.baystateparent.com/wp-content/uploads/2018/03/STU7BUE.jpg" alt="Second slide">
+								</div>
+								<div class="carousel-item">
+										<img class="d-block w-100" src="http://www.balloonsandchapters.com/img/top/promo/35a994f36c132888612c951bf4427477.jpg" alt="Third slide">
+								</div>
+						</div>
+				</div>
+				<div class="container-writer">
+						<div class="review-books">
+								<img class="d-block w-100" src="https://vik231229m1gjzr5eqnxbznd-wpengine.netdna-ssl.com/wp-content/uploads/sites/9/2015/09/featured-image-1.jpg">
+						</div>
+						<div class="card review-reader">
+							<div class="card-body text-center">
+									<h5 class="card-title">Review Books</h5>
+									<small>by: Muhammad Ramadiansyah</small>
+									<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+									<a href="#" class="btn btn-primary">Details</a>
+							</div>
+						</div>
+				</div>                      
+				<div class="container-top-products">
+						<list-books v-for="(book, index) in books" :key="index":cartlists="cartLists" :book="book" @additem="addToCart" @increaseitem="increaseItem" @decreaseItem="decreaseItem" :user="user"></list-books>
+				</div>
+				<!-- Modal -->
+				<!-- <items-in-cart></items-in-cart> -->
+		</div>  
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="dataBooks.js"></script>
     <script src="js/navbar-header.js"></script>
     <script src="js/list-books.js"></script>
     <script src ="js/items-in-cart.js"></script>
@@ -77,48 +60,57 @@
     new Vue({
         el: '#app',
         data: {
-            books: [],
-            cartLists: [],
+					books: [],
+					cartLists: [],
+					isLogin: false,
+					user: {}
         },
         methods: {
-            addToCart: function(book){
-                let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);    
-                book.quantity = 1
-                this.cartLists.push(book);
-            },
-            priceItems: function(book){
-                let price = book.quantity * book.price
-                return `Rp. ${price.toLocaleString()}`
-            },
-            increaseItem: function(book){
-                let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
-                let quantity = this.cartLists[index].quantity
-                quantity+=1;
-                this.cartLists[index].quantity = quantity;
-                let updateListCart = this.cartLists[index];
-                this.cartLists.splice(index,1,updateListCart)
-            },
-            decreaseItem: function(book){
-                let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
-                let quantity = this.cartLists[index].quantity
-                quantity-=1;
-                this.cartLists[index].quantity = quantity;
-                let updateListCart = this.cartLists[index];
-                this.cartLists.splice(index,1,updateListCart)
-                if(this.cartLists[index].quantity<=0){
-                    this.cartLists.splice(index,1)
-                }
-            },
-            getItems: function () {
-							axios.get('http://localhost:3000/users/getItems', {headers: {token: localStorage.getItem('token')}})
-									 .then((response) => {
-											console.log(response.data.result)
-											this.books = response.data.result
-										})
-										.catch((err) => {
-											alert(err.message)
-										})
-						}
+					addToCart: function(book){
+							console.log(book)
+					},
+					priceItems: function(book){
+							let price = book.quantity * book.price
+							return `Rp. ${price.toLocaleString()}`
+					},
+					increaseItem: function(book){
+							let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
+							let quantity = this.cartLists[index].quantity
+							quantity+=1;
+							this.cartLists[index].quantity = quantity;
+							let updateListCart = this.cartLists[index];
+							this.cartLists.splice(index,1,updateListCart)
+					},
+					decreaseItem: function(book){
+							let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
+							let quantity = this.cartLists[index].quantity
+							quantity-=1;
+							this.cartLists[index].quantity = quantity;
+							let updateListCart = this.cartLists[index];
+							this.cartLists.splice(index,1,updateListCart)
+							if(this.cartLists[index].quantity<=0){
+									this.cartLists.splice(index,1)
+							}
+					},
+					getItems: function () {
+						axios.get('http://localhost:3000/users/getItems', {headers: {token: localStorage.getItem('token')}})
+									.then((response) => {
+										console.log(response.data.result)
+										this.books = response.data.result
+									})
+									.catch((err) => {
+										alert(err.message)
+									})
+					},
+					getUserInfo: function () {
+						axios.get('http://localhost:3000/users/', {headers: {token: localStorage.getItem('token')}})
+									.then((response) => {
+										this.user = response.data.result
+									})
+									.catch((err) => {
+										alert(err.message)
+									})
+					}
         },
         computed: {
             totalPrice: function(){
@@ -130,10 +122,19 @@
             },
         },
         created: function () {
+					if(localStorage.getItem('token')){
+						this.isLogin = true
+						this.getUserInfo()
+					}
 					this.getItems()
         }
     })
 
     </script>
-  </body>
+	</body>
+	<footer>
+		<div class="jumbotron footer-rama">
+			<h1><marquee>HAHAHAHAHAHAH</marquee></h1>
+		</div>
+	</footer>
 </html>

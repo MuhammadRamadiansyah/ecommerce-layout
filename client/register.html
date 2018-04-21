@@ -7,130 +7,156 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="style.css" type="text/css" rel="stylesheet">
-    <title>Hello, world!</title>
+		<link href="style.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>iBooks</title>
   </head>
   <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="col-1 collapse navbar-collapse">
-                <a class="navbar-brand" href="index.html">iFarming!</a>
-            </div>
-            <div class="col-3 collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                </ul> 
-            </div>
-            <div class="col-3 offset-1 collapse navbar-collapse">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-            <div class="col-3 offset-1 collapse navbar-collapse" id="exCollapsingNavbar">
-                <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-                    <li class="dropdown order-1">
-                        <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-success dropdown-toggle">Login <span class="caret"></span></button>
-                        <ul class="dropdown-menu dropdown-menu-right mt-1 ">
-                            <li class="p-3">
-                                <form class="form" method="POST" action="/login">
-                                    <div class="form-group">
-                                        <input name="username" placeholder="Username" class="form-control form-control-sm" type="text" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input name="password" placeholder="Password" class="form-control form-control-sm" type="text" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block">Login</button>
-                                    </div>
-                                </form>
-                            </li>
-                        </ul>
-                        <button class="btn btn-outline-success" type="button">Register</button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="container-form-register">
-            <form>
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                    <label for="validationServer01">First name</label>
-                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                    <label for="validationServer02">Last name</label>
-                    <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                    <label for="validationServerUsername">Username</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend3">@</span>
-                        </div>
-                        <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
-                        <div class="invalid-feedback">
-                        Please choose a username.
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                    <label for="validationServer03">City</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
-                    </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                    <label for="validationServer04">State</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid state.
-                    </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                    <label for="validationServer05">Zip</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid zip.
-                    </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                    <label class="form-check-label" for="invalidCheck3">
-                        Agree to terms and conditions
-                    </label>
-                    <div class="invalid-feedback">
-                        You must agree before submitting.
-                    </div>
-                    </div>
-                </div>
-                <button class="btn btn-primary" type="submit">Submit form</button>
-            </form>
-        </div>
+    <div id="app">
+			<navbar-header></navbar-header>
+			<div class="card border-dark mb-3 admin-form" style="max-width: 30rem;">
+					<div class="card-header">REGISTER FORM</div>
+					<div class="card-body text-dark">
+						<h5 class="card-title">Dark card title</h5>
+						<form>
+								<div class="form-group">
+										<label for="exampleInpuFirstNamel1">First Name</label>
+										<input type="text" name="first_name" class="form-control"  aria-describedby="emailHelp" placeholder="Enter first name" v-model="first_name">
+										<small id="firstHelpRegis" class="form-text text-muted"></small>
+									</div>
+									<div class="form-group">
+											<label for="exampleInputLastName1">Last Name</label>
+											<input type="text" name="last_name" class="form-control"  aria-describedby="emailHelp" placeholder="Enter last name" v-model="last_name">
+											<small id="lastHelpRegis" class="form-text text-muted"></small>
+										</div>
+								<div class="form-group">
+									<label for="exampleInputEmail1">Email address</label>
+									<input type="email" name="new_email" class="form-control" id="exampleInputEmail1Regis" aria-describedby="emailHelp" placeholder="Enter email" v-model="newEmail">
+									<small id="emailHelpRegis" class="form-text text-muted"></small>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">Password</label>
+									<input type="password" name="new_password" class="form-control" id="exampleInputPassword1Regis" placeholder="Password"  v-model="newPassword">
+									<small id="passwordHelpRegis" class="form-text text-muted"></small>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1"> Confirm Password</label>
+									<input type="password" name="confirm_password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password" v-model="newConfirmPassword">
+									<small id="passwordConfirmHelpRegis" class="form-text text-muted"></small>
+								</div>
+								<button type="button" class="btn btn-primary btn-block" :class="{disabled: checkValidation()}" @click="register">Submit</button>
+							</form>
+					</div>
+				</div>
+		</div>  
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>		
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="js/navbar-header.js"></script>
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					first_name: '',
+					last_name: '',
+					newEmail: '',
+					newPassword: '',
+					newConfirmPassword: '',
+					isEmail: false,
+					isPassword: false,
+					isConfirm: false
+				},
+				methods: {
+					register () {
+						if(this.checkValidation()){
+							alert('harus diisi semuanyna')
+						} else {
+							let email = this.newEmail
+							let password = this.newPassword
+							let role = 'user'
+							let balance = 0
+							let first_name = this.first_name
+							let last_name = this.last_name
+							axios.post('http://localhost:3000/users/signup', {email, password, role, balance, first_name, last_name}, {})
+									.then((response) => {
+										console.log(response)
+										window.location.href="index.html"
+									})
+									.catch((err) => {
+										alert(err.message)
+									})
+						}
+					},
+					checkValidation () {
+						if(this.isEmail && this.isConfirm && this.isPassword && this.isFirstName && this.isLastName ) return false ; return true;
+					}
+				},
+				watch: {
+					newEmail: function () {
+						console.log(this.newEmail)
+						let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+						let checkEmail = re.test(String(this.newEmail).toLowerCase());
+						if(checkEmail){
+							$('#emailHelpRegis').text("correct email").css("color","green")
+							$('[name="new_email"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
+							this.isEmail = true;
+						} else {
+							console.log('still')
+							$('#emailHelpRegis').text("wrong email").css("color","red")
+							$('[name="new_email"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
+							this.isEmail = false;
+						}
+					},
+					newPassword: function () {
+						console.log(this.newPassword)
+						if(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/.test(String(this.newPassword))){
+							$('#passwordHelpRegis').text("correct password").css("color","green")
+							$('[name="new_password"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
+							this.isPassword = true;
+						}else{
+							$('#passwordHelpRegis').text("password must contain at least 1 uppercase, 1 lowercase, and 1 number").css("color","green")
+							$('[name="new_password"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
+							this.isPassword = false;
+						}
+					},
+					newConfirmPassword: function () {
+						if(this.newConfirmPassword === this.newPassword){
+							$('#passwordConfirmHelpRegis').text("password match").css("color","green")
+							$('[name="confirm_password"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
+							this.isConfirm = true
+						} else {
+							$('#passwordConfirmHelpRegis').text("password not match").css("color","red")
+							$('[name="confirm_password"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
+							this.isConfirm = false;
+						}
+					},
+					first_name: function () {
+						if(this.first_name.length > 5){
+							$('#firstHelpRegis').text("first name correct !").css("color","green")
+							$('[name="first_name"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
+							this.isFirstName = true
+						} else {
+							$('#firstHelpRegis').text("first name at least 6 characters !").css("color","red")
+							$('[name="first_name"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
+							this.isFirstName = false
+						}
+					},
+					last_name: function () {
+						if(this.last_name.length > 5){
+							$('#lastHelpRegis').text("last name correct !").css("color","green")
+							$('[name="last_name"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
+							this.isLastName = true
+						} else {
+							$('#lastHelpRegis').text("last name at least 6 characters !").css("color","red")
+							$('[name="last_name"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
+							this.isLastName = false
+						}
+					}
+    		},
+			})
+		</script>
   </body>
   <footer>
       

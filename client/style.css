@@ -231,3 +231,9 @@
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
   }
+
+  .footer-rama {
+    background-image: url('http://www.cvitanic.info/wp-content/uploads/2016/05/Footer-background.jpg');
+    position: absolute;
+    width: 100%;
+  }

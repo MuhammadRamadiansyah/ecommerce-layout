@@ -18,11 +18,11 @@ Vue.component('list-books', {
 					</div>
         </div>
         <div class="card-footer text-muted">
-            <span v-for="rating in book.rating" class="fa fa-star checked"></span>
+            <footer class="footer"><cite title="Source Title">{{book.category.name}}</cite></footer>
         </div>
     </div>
     `,
-    props: ['book','cartlists'],
+    props: ['book','cartlists', 'user'],
     methods: {
         checkItemInCart: function(item){
             let index = -1;
