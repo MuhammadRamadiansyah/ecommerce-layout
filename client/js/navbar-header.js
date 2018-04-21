@@ -40,7 +40,7 @@ Vue.component('navbar-header', {
                     </div>
                     <div class="btn-group">
                             <button class="btn btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="fa fa-gear" aria-hidden="true">
+                                <span class="fa fa-gear" aria-hidden="true" />
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profle</a>

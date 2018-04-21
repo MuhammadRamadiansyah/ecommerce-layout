@@ -1,4 +1,4 @@
-const jtw = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const envKey = process.env.secretKey
 const {isError} = require('../helpers/statusResponse')
 
@@ -8,10 +8,9 @@ module.exports = {
         let token = req.headers.token;
         jwt.verify(token, envKey, (err, decoded)=>{
             if(err){
-                isError(res, err, status)
+                isError(res, err, 500)
             }else{
-                req.headers.token = decoded
-                next(decoded)
+                next()
             }
         })
         
@@ -19,19 +18,18 @@ module.exports = {
     isAdmin: function(req, res, next){
         let token = req.headers.token;
         jwt.verify(token, envKey, (err, decoded)=>{
-            if(err){
-                isError(res, err, status)
-            }else{
-                if(decoded.role == "admin"){
-                    req.headers.token = decoded
-                    next(decoded)
-                }else{
-                    let err = {
-                        message: "youre not allowed access this page"
-                    }
-                    isError(res, err, 403)
-                }
-            }
+					if(err){
+						isError(res, err, 500)
+					}else{
+						if(decoded.role == "admin"){
+							next()
+						}else{
+							let err = {
+								message: "youre not allowed access this page"
+							}
+							isError(res, err, 403)
+						}
+					}
         })
     }
 }

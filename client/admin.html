@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="style.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <title>ADMIN</title>
+</head>
+<body>
+  <div id="app" class="container-admin">
+    <div class="card border-dark mb-3 admin-form" style="max-width: 30rem;" v-if="!isLogin">
+      <div class="card-header">Header</div>
+      <div class="card-body text-dark">
+        <h5 class="card-title">Dark card title</h5>
+        <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" v-model="email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="password">
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" @click="login">Submit</button>
+          </form>
+      </div>
+    </div>
+    <div class="card border-dark mb-3 admin-form" style="max-width: 30rem;" v-if="!isLogin">
+      <div class="card-header">REGISTER FORM</div>
+      <div class="card-body text-dark">
+        <h5 class="card-title">Dark card title</h5>
+        <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" name="new_email" class="form-control" id="exampleInputEmail1Regis" aria-describedby="emailHelp" placeholder="Enter email" v-model="newEmail">
+              <small id="emailHelpRegis" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" name="new_password" class="form-control" id="exampleInputPassword1Regis" placeholder="Password"  v-model="newPassword">
+              <small id="passwordHelpRegis" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1"> Confirm Password</label>
+              <input type="password" name="confirm_password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password" v-model="newConfirmPassword">
+              <small id="passwordConfirmHelpRegis" class="form-text text-muted"></small>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" :class="{disabled: checkValidation()}" @click="register">Submit</button>
+          </form>
+      </div>
+    </div>
+    <div style="width: 80rem; text-align: center;" v-else>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in items" :key="index">
+            <th scope="row">{{index + 1}}</th>
+            <td><img :src="item.image"  style="max-width: 3rem;"/></td>
+            <td>{{item.name}}</td>
+            <td>{{ `Rp ` + item.price.toLocaleString()}}</td>
+            <td>{{item.quantity}}</td>
+            <td><button type="button" class="btn btn-outline-primary">EDIT</button>  <button type="button" class="btn btn-outline-danger">DELETE</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <!-- Button trigger modal -->
+        <button type="button btn-lg btn-block" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
+            ADD NEW ITEM
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput">Names: </label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" v-model="itemName">
+                  </div>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput2">Price: </label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input" v-model="price">
+                  </div>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput">Quantity: </label>
+                    <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Example input" v-model="quantity">
+                  </div>
+                  <div class="form-group">
+                      <label for="title">Picture/Poster</label>
+                      <input type="file" class="form-control" name="picture" accept="image/*" @change="handleUploadPicture">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" @click="upload">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>
+
+  new Vue ({
+    el: '#app',
+    data: {
+      newEmail: '',
+      newPassword: '',
+      newConfirmPassword: '',
+      email: '',
+      password: '',
+      isEmail: false,
+      isConfirm: false,
+      isPassword: false,
+      isLogin: false,
+      itemName: '',
+      price: '',
+      quantity: '',
+      image: '',
+      dummy: 'https://storage.googleapis.com/ecommerce.ramadiansyah.gq/1524306332513-Unknown.png',
+      items: [] 
+    },
+    methods: {
+      checkValidation () {
+        if(this.isEmail && this.isConfirm && this.isPassword) return false ; return true;
+      },
+      register () {
+        if(this.checkValidation()){
+          alert('harus diisi semuanyna')
+        } else {
+          let email = this.newEmail
+          let password = this.newPassword
+          let role = 'admin'
+          let balance = 0
+          let first_name = 'admin'
+          let last_name = 'e-commerce'
+          axios.post('http://localhost:3000/users/signup', {email, password, role, balance, first_name, last_name}, {})
+               .then((response) => {
+                 console.log(response)
+                 location.reload()
+               })
+               .catch((err) => {
+                 alert(err.message)
+               })
+        }
+      },
+      login () {
+        let email = this.email
+        let password = this.password
+        console.log(email)
+        axios.post('http://localhost:3000/users/signin', {email, password}, {})
+             .then((response) => {
+               localStorage.setItem('token', response.data.result)
+               location.reload()
+             })
+             .catch((err) => {
+               alert(err.message)
+             })
+      },
+      upload () {
+
+        let formData = new FormData()
+        formData.append('image', this.image)
+        formData.append('name', this.itemName)
+        formData.append('price', this.price)
+        formData.append('quantity', this.quantity)
+
+        axios.post('http://localhost:3000/users/upload', formData, {
+              headers: {
+                'Content-type': 'multipart/form-data',
+                token: localStorage.getItem('token')
+              }
+            })
+            .then((response) => {
+              console.log('success upload')
+              location.reload()
+            })
+            .catch((err) => {
+              alert('failed upload')
+            })
+      },
+      handleUploadPicture () {
+        console.log('event===', event.target.files)
+        this.image = event.target.files[0]
+      },
+      getItems () {
+        axios.get('http://localhost:3000/users/getItems', {headers: {token: localStorage.getItem('token')}})
+             .then((response) => {
+               console.log(response.data.result)
+               this.items = response.data.result
+             })
+             .catch((err) => {
+               alert(err.message)
+             })
+      }
+    },
+    watch: {
+      newEmail: function () {
+        console.log(this.newEmail)
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let checkEmail = re.test(String(this.newEmail).toLowerCase());
+        if(checkEmail){
+          $('#emailHelpRegis').text("correct email").css("color","green")
+          $('[name="new_email"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
+          this.isEmail = true;
+        } else {
+          console.log('still')
+          $('#emailHelpRegis').text("wrong email").css("color","red")
+          $('[name="new_email"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
+          this.isEmail = false;
+        }
+      },
+      newPassword: function () {
+        console.log(this.newPassword)
+        if(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/.test(String(this.newPassword))){
+          $('#passwordHelpRegis').text("correct password").css("color","green")
+          $('[name="new_password"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
+          this.isPassword = true;
+        }else{
+          $('#passwordHelpRegis').text("password must contain at least 1 uppercase, 1 lowercase, and 1 number").css("color","green")
+          $('[name="new_password"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
+          this.isPassword = false;
+        }
+      },
+      newConfirmPassword: function () {
+        if(this.newConfirmPassword === this.newPassword){
+          $('#passwordConfirmHelpRegis').text("password match").css("color","green")
+          $('[name="confirm_password"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
+          this.isConfirm = true
+        } else {
+          $('#passwordConfirmHelpRegis').text("password not match").css("color","red")
+          $('[name="confirm_password"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
+          this.isConfirm = false;
+        }
+      }
+    },
+    mounted: function () {
+      if(localStorage.getItem('token')) {
+        this.isLogin = true;
+        this.getItems()
+      }
+    }
+  })
+</script>
+</html>

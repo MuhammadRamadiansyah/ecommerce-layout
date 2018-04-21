@@ -1,5 +1,6 @@
 const Users = require('../models/users')
-const jtw = require('jsonwebtoken')
+const Items = require('../models/items')
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const envKey = process.env.secretKey
 const mongoose = require('mongoose')
@@ -22,7 +23,7 @@ module.exports = {
 					email: req.body.email,
 					password: req.body.password,
 					balance: 50000,
-					role: 'user'
+					role: req.body.role
 			}
 
 			bcrypt.hash(newData.password, 10, (err, hash) => {
@@ -52,9 +53,41 @@ module.exports = {
 							bcrypt.compare(req.body.password, user.password, (err, result) => {
 								if(err) isError(res, err, 404);
 								if(!result) isError(res, err = {message: 'wrong password'}, 400)
-								isSuccess(res, result, 200, 'success sign in')
+								let token = jwt.sign({id:user._id, email:user.email, role:user.role}, envKey)
+								isSuccess(res, token, 200, 'success sign in')
 							})
 						}
+				 })
+				 .catch((err) => {
+					 isError(res, err, 500)
+				 })
+	},
+	upload: function(req, res) {
+		let newItem = {
+			name: req.body.name,
+			price: parseInt(req.body.price),
+			quantity: parseInt(req.body.quantity),
+			image: req.file.cloudStoragePublicUrl
+		}
+
+		let item = new Items(newItem)
+		item.save()
+				.then((response) => {
+					res.send({
+						status: 200,
+						message: 'Your file is successfully uploaded',
+						link: req.file.cloudStoragePublicUrl
+					})
+				})
+				.catch((err) => {
+					isError(res, err, 500)
+				})
+	},
+	getItems: function (req, res) {
+		Items.find()
+				 .exec()
+				 .then((response) => {
+					 isSuccess(res, response, 200, 'success get all items data')
 				 })
 				 .catch((err) => {
 					 isError(res, err, 500)

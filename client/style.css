@@ -8,6 +8,29 @@
 
 }
 
+.container-admin {
+  /* background-image: url('https://image.freepik.com/free-vector/shopping-online-sale-background_23-2147509490.jpg'); */
+  background-size: cover; 
+  display: flex;
+  justify-content: center;
+  height: 60rem;
+  flex-wrap: wrap;
+}
+.admin-form {
+  background-image: url('http://backgroundcheckall.com/wp-content/uploads/2017/12/background-warna-krem-1.jpg');
+  height: 60%;
+  width: 50%;
+  margin: 50px;
+  align-self: center;
+  display: flex;
+}
+
+.btn-flex {
+  align-self: flex-end;
+  border: 3px solid red;
+  background: blue;
+}
+
 .logo-container{
   align-self: flex-start;
 }
