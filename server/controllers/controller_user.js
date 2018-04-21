@@ -127,7 +127,40 @@ module.exports = {
 							})
 	},
 	addToCart: function (req, res) {
-
+		let userId = req.decoded.id
+		let updateData = {
+			$push: {cart: req.body.book._id},
+			updatedAt: new Date()
+		}
+		let updateBook = {
+			quantity: req.body.book.quantity - 1,
+			updatedAt: new Date()
+		}
+		Users.findOneAndUpdate({_id: userId}, updateData)
+				 .then((user) => {
+					 console.log('masil')
+						if(user === null) {
+							isError(res, err = {message: 'user not found'}, 500)
+						} else {
+							Items.findOneAndUpdate({_id: req.body.book._id}, updateBook)
+									 .then((book) => {
+										if(book===null){
+											isError(res, err = {message: 'not found'}, 500)
+										} else {
+											res.status(200).json({
+												book,
+												user
+											})
+										}
+									 })
+									 .catch((err) => {
+										 isError(res, err, 500)
+									 })
+						}
+				 })
+				 .catch((err) => {
+					 isError(res, err, 500)
+				 })
 	},
 	getUserInfo: function (req, res) {
 		Users.findOne({_id: req.decoded.id})
