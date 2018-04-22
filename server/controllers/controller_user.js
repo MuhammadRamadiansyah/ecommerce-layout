@@ -41,10 +41,8 @@ module.exports = {
 			})
     },
 	signin: function(req, res) {
-		console.log(req.body.email)
 		Users.findOne({email: req.body.email})
 				 .then((user) => {
-					 console.log(user)
 						if(user == null) {
 							let err = {
 								message: 'user not found'
@@ -170,6 +168,88 @@ module.exports = {
 					} else {
 						isSuccess(res, user, 200, 'user found')
 					}
+				 })
+				 .catch((err) => {
+					 isError(res, err, 500)
+				 })
+	},
+	checkout: function (req, res){
+		req.body.updateItems.forEach(element => {
+			Items.findOne({_id: element._id})
+					 .exec()
+					 .then((item) => {
+						let updateData = {
+							updatedAt: new Date,
+							quantity: item.quantity - element.quantity
+						}
+						if(updateData.quantity > 0){
+							item.update(updateData)
+								.then((result) => {
+									isSuccess(res, result, 200, 'success update')
+								})
+								.catch((err) => {
+									isError(res, err, 500)
+								})
+						} else {
+							console.log('masukkkk')
+							item.remove({_id: element._id})
+									 .then((result) => {
+										isSuccess(res, result, 200, 'success update')
+									 })
+									 .catch((err) => {
+										 isError(res, err, 55)
+									 })
+						}
+					 })
+					 .catch((err) => {
+						 isError(res, err, 500)
+					 })
+		});
+		Users.findOne({_id: req.decoded.id})
+				 .then((user) => {
+					user.update({
+						balance: user.balance - req.body.totalPrice
+					})
+					.then((result) => {
+						isSuccess(res, result, 200, 'success update')
+					})
+					.catch((err) => {
+						isError(res, err, 500)
+					})
+				 })
+				 .catch((err) => {
+					 isError(res, err, 500)
+				 })
+	},
+	deleteItem: function (req, res){
+		Items.findOne({_id: req.params.id})
+				 .then((item) => {
+					item.remove()
+							.then((result) => {
+								isSuccess(res, result, 200, 'success delete')
+							})
+							.catch((err) => {
+								isError(res, err, 500)
+							})
+				 })
+				 .catch((err) => {
+					 isError(res, err, 500)
+				 })
+	},
+	topUp: function (req, res) {
+		Users.findOne({_id: req.decoded.id})
+				 .then((user) => {
+					user.update({
+						updatedAt: new Date(),
+						balance: user.balance + req.body.balance
+					})
+					.then((result) => {
+						let newBalance = user.balance + req.body.balance
+						isSuccess(res, newBalance, 200, 'success top up')
+					})
+					.catch((err) => {
+						isError(res, err, 500)
+					})
 				 })
 				 .catch((err) => {
 					 isError(res, err, 500)

@@ -34,6 +34,15 @@ itemSchema.pre('save', function(next){
 	)
 });
 
+itemSchema.pre('remove', function(next){
+  this.model('categories').update(
+    {_id:  this.category}, 
+    {$pull: {items: this._id}}, 
+    {multi: true},
+    next,
+  )
+});
+
 let Item = mongoose.model('items', itemSchema)
 
 module.exports = Item
