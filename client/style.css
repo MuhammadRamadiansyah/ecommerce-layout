@@ -1,6 +1,11 @@
+body {
+  background-color: wheat;
+}
+
 .container-navbar{
   display: flex;
   flex-wrap: wrap;
+  background-image: url('http://mobiletuts.s3.amazonaws.com/51_Spendometer-Redesign-1/spendometer-24.jpg')
 }
 
 .menu-container{
@@ -9,7 +14,7 @@
 }
 
 .container-admin {
-  /* background-image: url('https://image.freepik.com/free-vector/shopping-online-sale-background_23-2147509490.jpg'); */
+  background-image: url('https://cdn.wallpaperdirect.com/shared-assets/images/products/128127orig.jpg');
   background-size: cover; 
   display: flex;
   justify-content: center;
@@ -17,7 +22,6 @@
   flex-wrap: wrap;
 }
 .admin-form {
-  background-image: url('http://backgroundcheckall.com/wp-content/uploads/2017/12/background-warna-krem-1.jpg');
   height: 60%;
   width: 50%;
   margin: 50px;
@@ -110,7 +114,7 @@
 }
 
 .card-img-top{
-    height: 200px;
+    height: 100px;
 }
 
 
@@ -224,16 +228,25 @@
   .wobble:hover {
     -webkit-animation-name: wobble;
     animation-name: wobble;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
     -webkit-animation-timing-function: ease-in-out;
     animation-timing-function: ease-in-out;
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
+    background: #F0FFF0;
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(1.1);
+    color: black;
+    font-size: larger;
   }
 
   .footer-rama {
-    background-image: url('http://www.cvitanic.info/wp-content/uploads/2016/05/Footer-background.jpg');
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfNDjj6ex-JYTPNM5scUk-skNkdval6zcL2rDZ8bw9lQH9u03');
     position: absolute;
     width: 100%;
+    text-align: center;
+    background-position: bottom;
   }
+  

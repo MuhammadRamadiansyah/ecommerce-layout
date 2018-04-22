@@ -13,7 +13,7 @@
   </head>
   <body>
 		<div id="app">
-				<navbar-header :islogin="isLogin" :user="user"></navbar-header>
+				<navbar-header class="container-navbar" :islogin="isLogin" :user="user" :lists="cartLists" @additem="addToCart"  @decreaseItem="decreaseItem"></navbar-header>
 				<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner">
 								<div class="carousel-item active">
@@ -27,7 +27,7 @@
 								</div>
 						</div>
 				</div>
-				<div class="container-writer">
+				<!-- <div class="container-writer">
 						<div class="review-books">
 								<img class="d-block w-100" src="https://vik231229m1gjzr5eqnxbznd-wpengine.netdna-ssl.com/wp-content/uploads/sites/9/2015/09/featured-image-1.jpg">
 						</div>
@@ -39,15 +39,40 @@
 									<a href="#" class="btn btn-primary">Details</a>
 							</div>
 						</div>
-				</div>                      
-				<div class="container-top-products">
-						<list-books v-for="(book, index) in books" :key="index":cartlists="cartLists" :book="book" @additem="addToCart" @increaseitem="increaseItem" @decreaseItem="decreaseItem" :user="user"></list-books>
+				</div>                       -->
+				<div class="card">
+						<div class="card-header">
+							<h5><marquee>iBooks Items! Go find your favorite books!</marquee></h5>
+						</div>
+						<div class="card-body container-top-products ">
+							<list-books v-for="(book, index) in books" :key="index":cartlists="cartLists" :book="book" @additem="addToCart"  @decreaseItem="decreaseItem" :user="user"></list-books>
+						</div>
 				</div>
-				<!-- Modal -->
-				<!-- <items-in-cart></items-in-cart> -->
+				<div class="card">
+						<div class="card-header">
+								<div style="text-align: center">
+									<h4>Find out your favorite books here</h4>
+								</div>
+								<h6>
+								<div class="input-group">
+										<select class="custom-select" id="selectorId">
+											<option class="disabled" aria-placeholder="Select an option" value="null">Select an option</option>
+											<option name="tag" v-for="(tag, index) in tags" :key="index" :value="tag.name">{{tag.name}}</option>
+										</select>
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" type="button"  @click="filter()">Search</button>
+										</div>
+									</div>
+							</h6>			
+						</div>
+						<div class="card-body container-top-products ">
+							<list-books v-for="(book, index) in filterBooks" :key="index":cartlists="cartLists" :book="book" @additem="addToCart"  @decreaseItem="decreaseItem" :user="user"></list-books>
+						</div>
+				</div>
 		</div>  
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -63,43 +88,31 @@
 					books: [],
 					cartLists: [],
 					isLogin: false,
-					user: {}
+					tags: [],
+					user: {},
+					filterBooks: [],
         },
         methods: {
 					addToCart: function(book){
-							console.log(book)
+						this.checkList(book)
+						this.user.cart.push(book)
 					},
 					priceItems: function(book){
 							let price = book.quantity * book.price
 							return `Rp. ${price.toLocaleString()}`
 					},
-					increaseItem: function(book){
-							let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
-							let quantity = this.cartLists[index].quantity
-							quantity+=1;
-							this.cartLists[index].quantity = quantity;
-							let updateListCart = this.cartLists[index];
-							this.cartLists.splice(index,1,updateListCart)
-					},
 					decreaseItem: function(book){
-							let index = this.cartLists.findIndex(oldBook => oldBook.id === book.id);
-							let quantity = this.cartLists[index].quantity
-							quantity-=1;
-							this.cartLists[index].quantity = quantity;
-							let updateListCart = this.cartLists[index];
-							this.cartLists.splice(index,1,updateListCart)
-							if(this.cartLists[index].quantity<=0){
-									this.cartLists.splice(index,1)
-							}
+						let index = this.user.cart.findIndex(item => item._id === book._id);
+						this.user.cart.splice(index,1)
+						this.checkList(book)
 					},
 					getItems: function () {
 						axios.get('http://localhost:3000/users/getItems', {headers: {token: localStorage.getItem('token')}})
 									.then((response) => {
-										console.log(response.data.result)
 										this.books = response.data.result
 									})
 									.catch((err) => {
-										alert(err.message)
+										swal("Get items failed", err.message, "failed");
 									})
 					},
 					getUserInfo: function () {
@@ -108,25 +121,40 @@
 										this.user = response.data.result
 									})
 									.catch((err) => {
-										alert(err.message)
+										swal("Get user info failed", err.message, "failed");
 									})
+					},
+					checkList: function (book) {
+						let i = this.user.cart.findIndex(item => item._id === book._id);
+						let j = this.cartLists.findIndex(item => item._id === book._id)
+						if(i === -1 && j === -1) {
+							this.cartLists.push(book)
+						} else if( i === -1 && j !== -1) {
+							this.cartLists.splice(j,1)
+						}
+					},
+					getCategories () {
+						axios.get('http://localhost:3000/users/categories')
+								.then((response) => {
+									this.tags = response.data.result
+								})
+								.catch((err) => {
+									swal("Get categories failed", err.message, "failed");
+								})
+					},
+					filter () {
+						let filterTag = $('#selectorId').val()
+						this.filterBooks = this.books.filter(book => book.category.name === filterTag)
 					}
-        },
-        computed: {
-            totalPrice: function(){
-                let totalPrice = 0
-                for(let i=0; i< this.cartLists.length;i++){
-                    totalPrice += this.cartLists[i].price * this.cartLists[i].quantity
-                }
-                  return `Rp. ${totalPrice.toLocaleString()}`
-            },
-        },
-        created: function () {
+				},
+				
+        mounted: function () {
 					if(localStorage.getItem('token')){
 						this.isLogin = true
 						this.getUserInfo()
+						this.getItems()
+						this.getCategories()
 					}
-					this.getItems()
         }
     })
 
@@ -134,7 +162,10 @@
 	</body>
 	<footer>
 		<div class="jumbotron footer-rama">
-			<h1><marquee>HAHAHAHAHAHAH</marquee></h1>
+			<h5> <cite title="Source Title">&copy ramadiansyah</cite></h5>
+			<h5 class="fa fa-facebook-square"> <cite title="Source Title"> https://www.facebook.com/muh.ramadiansyah</cite></h5>
+			<br>
+			<h5 class="fa fa-twitter-square"> <cite title="Source Title"> https://twitter.com/ramramdi</cite></h5>
 		</div>
 	</footer>
 </html>

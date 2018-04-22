@@ -12,8 +12,7 @@
     <title>iBooks</title>
   </head>
   <body>
-    <div id="app">
-			<navbar-header></navbar-header>
+    <div id="app" class="container-admin">
 			<div class="card border-dark mb-3 admin-form" style="max-width: 30rem;">
 					<div class="card-header">REGISTER FORM</div>
 					<div class="card-body text-dark">
@@ -45,16 +44,17 @@
 									<small id="passwordConfirmHelpRegis" class="form-text text-muted"></small>
 								</div>
 								<button type="button" class="btn btn-primary btn-block" :class="{disabled: checkValidation()}" @click="register">Submit</button>
+								<br><br>
 							</form>
 					</div>
 				</div>
 		</div>  
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>		
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<script src="js/navbar-header.js"></script>
 		<script>
 			new Vue({
 				el: '#app',
@@ -71,7 +71,7 @@
 				methods: {
 					register () {
 						if(this.checkValidation()){
-							alert('harus diisi semuanyna')
+							swal("WARNING!", "You have to fill in all of the form text label");
 						} else {
 							let email = this.newEmail
 							let password = this.newPassword
@@ -82,10 +82,25 @@
 							axios.post('http://localhost:3000/users/signup', {email, password, role, balance, first_name, last_name}, {})
 									.then((response) => {
 										console.log(response)
-										window.location.href="index.html"
+										swal({
+											title: "Congratulations",
+											text: "You are an user in this app right now",
+											icon: "success",
+											button: "Ok!",
+										});
+										window.setTimeout(function(){ 
+											axios.post('http://localhost:3000/users/signin', {email, password}, {})
+													.then((response) => {
+															localStorage.setItem('token', response.data.result)
+															window.location.href="index.html"
+													})
+													.catch((err) => {
+														swal("Login failed", err.message, "failed");
+													})
+										} ,3000);
 									})
 									.catch((err) => {
-										alert(err.message)
+										swal("Register failed", err.message, "failed");
 									})
 						}
 					},
