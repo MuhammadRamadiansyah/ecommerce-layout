@@ -170,7 +170,7 @@
       login () {
         let email = this.email
         let password = this.password
-        axios.post('http://localhost:3000/users/signin', {email, password}, {})
+        axios.post('http://ramadiansyah.gq/users/signin', {email, password}, {})
              .then((response) => {
                localStorage.setItem('token', response.data.result)
                swal({
@@ -217,7 +217,7 @@
         formData.append('quantity', this.quantity)
         let newTag = $('#selectorId').val()
         formData.append('category', newTag)
-        axios.post('http://localhost:3000/users/upload', formData, {
+        axios.post('http://ramadiansyah.gq/users/upload', formData, {
               headers: {
                 'Content-type': 'multipart/form-data',
                 token: localStorage.getItem('token')
@@ -239,11 +239,10 @@
             })
       },
       handleUploadPicture () {
-        console.log('event===', event.target.files)
         this.image = event.target.files[0]
       },
       getItems () {
-        axios.get('http://localhost:3000/users/getItems', {headers: {token: localStorage.getItem('token')}})
+        axios.get('http://ramadiansyah.gq/users/getItems', {headers: {token: localStorage.getItem('token')}})
              .then((response) => {
                this.items = response.data.result
              })
@@ -261,7 +260,7 @@
         })
         .then((willDelete) => {
           if (willDelete) {
-            axios.delete(`http://localhost:3000/users/delete/${item._id}`, {headers: {token: localStorage.getItem('token')}})
+            axios.delete(`http://ramadiansyah.gq/users/delete/${item._id}`, {headers: {token: localStorage.getItem('token')}})
              .then((response) => {
                   swal("Your file has been deleted!", {
                     icon: "success",
@@ -279,7 +278,7 @@
         });
       },
       getCategories () {
-        axios.get('http://localhost:3000/users/categories')
+        axios.get('http://ramadiansyah.gq/users/categories')
              .then((response) => {
                this.tags = response.data.result
              })
@@ -297,7 +296,7 @@
           let balance = 0
           let first_name = 'admin'
           let last_name = 'e-commerce'
-          axios.post('http://localhost:3000/users/signup', {email, password, role, balance, first_name, last_name}, {})
+          axios.post('http://ramadiansyah.gq/users/signup', {email, password, role, balance, first_name, last_name}, {})
                .then((response) => {              
                 swal({
                   title: "Congratulations",
@@ -306,7 +305,7 @@
                   button: "Ok!",
                 });
                 window.setTimeout(function(){ 
-                  axios.post('http://localhost:3000/users/signin', {email, password}, {})
+                  axios.post('http://ramadiansyah.gq/users/signin', {email, password}, {})
                        .then((response) => {
                           localStorage.setItem('token', response.data.result)
                           location.reload()
@@ -324,7 +323,6 @@
     },
     watch: {
       newEmail: function () {
-        console.log(this.newEmail)
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let checkEmail = re.test(String(this.newEmail).toLowerCase());
         if(checkEmail){
@@ -332,14 +330,12 @@
           $('[name="new_email"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
           this.isEmail = true;
         } else {
-          console.log('still')
           $('#emailHelpRegis').text("wrong email").css("color","red")
           $('[name="new_email"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
           this.isEmail = false;
         }
       },
       newPassword: function () {
-        console.log(this.newPassword)
         if(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/.test(String(this.newPassword))){
           $('#passwordHelpRegis').text("correct password").css("color","green")
           $('[name="new_password"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})

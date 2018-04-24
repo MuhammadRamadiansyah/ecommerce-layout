@@ -136,7 +136,6 @@ module.exports = {
 		}
 		Users.findOneAndUpdate({_id: userId}, updateData)
 				 .then((user) => {
-					 console.log('masil')
 						if(user === null) {
 							isError(res, err = {message: 'user not found'}, 500)
 						} else {
@@ -191,7 +190,6 @@ module.exports = {
 									isError(res, err, 500)
 								})
 						} else {
-							console.log('masukkkk')
 							item.remove({_id: element._id})
 									 .then((result) => {
 										isSuccess(res, result, 200, 'success update')

@@ -107,7 +107,7 @@
 						this.checkList(book)
 					},
 					getItems: function () {
-						axios.get('http://localhost:3000/users/getItems', {headers: {token: localStorage.getItem('token')}})
+						axios.get('http://ramadiansyah.gq/users/getItems', {headers: {token: localStorage.getItem('token')}})
 									.then((response) => {
 										this.books = response.data.result
 									})
@@ -116,7 +116,7 @@
 									})
 					},
 					getUserInfo: function () {
-						axios.get('http://localhost:3000/users/', {headers: {token: localStorage.getItem('token')}})
+						axios.get('http://ramadiansyah.gq/users/', {headers: {token: localStorage.getItem('token')}})
 									.then((response) => {
 										this.user = response.data.result
 									})
@@ -134,7 +134,7 @@
 						}
 					},
 					getCategories () {
-						axios.get('http://localhost:3000/users/categories')
+						axios.get('http://ramadiansyah.gq/users/categories')
 								.then((response) => {
 									this.tags = response.data.result
 								})

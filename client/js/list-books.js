@@ -54,7 +54,6 @@ Vue.component('list-books', {
 					this.checkQuantity()
         },
         decreaseItem: function(){
-					console.log(this.book.quantity - this.quantity)
 					this.$emit('decreaseitem', this.book)
 					if(this.book.quantity - this.quantity == 0 && this.book.quantity == 1){
 						this.quantity = 0

@@ -167,9 +167,7 @@ Vue.component('navbar-header', {
 		props: ['islogin', 'user', 'lists'],
     methods: {
         login() {
-            console.log(this.email)
-						console.log(this.password)
-						axios.post('http://localhost:3000/users/signin',{email: this.email, password: this.password})
+						axios.post('http://ramadiansyah.gq/users/signin',{email: this.email, password: this.password})
 								 .then((response) => {
 										localStorage.setItem('token', response.data.result)
 										swal({
@@ -245,7 +243,7 @@ Vue.component('navbar-header', {
 					.then((willBuy) => {
 						if (willBuy) {
 							if(this.user.balance - totalPrice >= 0){
-								axios.put('http://localhost:3000/users/checkout', {totalPrice, updateItems}, {headers: {token: localStorage.getItem('token')}})
+								axios.put('http://ramadiansyah.gq/users/checkout', {totalPrice, updateItems}, {headers: {token: localStorage.getItem('token')}})
 								.then((response) => {
 									swal("You are successfully buy your items!", {
 										icon: "success",
@@ -268,7 +266,7 @@ Vue.component('navbar-header', {
 				},
 				top_up () {
 					let balance = parseInt(this.topUp)
-					axios.patch('http://localhost:3000/users/topup', {balance}, {headers: {token: localStorage.getItem('token')}})
+					axios.patch('http://ramadiansyah.gq/users/topup', {balance}, {headers: {token: localStorage.getItem('token')}})
 							 .then((response) => {
 									swal({
 										title: "Good job!",
@@ -294,9 +292,8 @@ Vue.component('navbar-header', {
 						let balance = 0
 						let first_name = this.first_name
 						let last_name = this.last_name
-						axios.post('http://localhost:3000/users/signup', {email, password, role, balance, first_name, last_name}, {})
+						axios.post('http://ramadiansyah.gq/users/signup', {email, password, role, balance, first_name, last_name}, {})
 								.then((response) => {
-									console.log(response)
 									swal({
 										title: "Congratulations",
 										text: "You are an user in this app right now",
@@ -304,7 +301,7 @@ Vue.component('navbar-header', {
 										button: "Ok!",
 									});
 									window.setTimeout(function(){ 
-										axios.post('http://localhost:3000/users/signin', {email, password}, {})
+										axios.post('http://ramadiansyah.gq/users/signin', {email, password}, {})
 												.then((response) => {
 														localStorage.setItem('token', response.data.result)
 														window.location.href="index.html"
@@ -338,7 +335,6 @@ Vue.component('navbar-header', {
 		},
 		watch: {
 			newEmail: function () {
-				console.log(this.newEmail)
 				let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 				let checkEmail = re.test(String(this.newEmail).toLowerCase());
 				if(checkEmail){
@@ -346,14 +342,12 @@ Vue.component('navbar-header', {
 					$('[name="new_email"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
 					this.isEmail = true;
 				} else {
-					console.log('still')
 					$('#emailHelpRegis').text("wrong email").css("color","red")
 					$('[name="new_email"]').css({"border-color": "red", "border-solid": "bold", "border-width": "3px"})
 					this.isEmail = false;
 				}
 			},
 			newPassword: function () {
-				console.log(this.newPassword)
 				if(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/.test(String(this.newPassword))){
 					$('#passwordHelpRegis').text("correct password").css("color","green")
 					$('[name="new_password"]').css({"border-color": "green", "border-solid": "bold", "border-width": "3px"})
